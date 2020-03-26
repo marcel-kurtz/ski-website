@@ -1,0 +1,17 @@
+.red-green-checkbox  {
+    display:none;
+}
+
+.red-green-checkbox  + label::before {
+    width: 15px;
+    height: 15px;
+    border-radius: 1px;
+    background-color: $red;
+    display: block;
+    content: "";
+    float: left;
+    margin-right: 5px;
+  }
+.red-green-checkbox:checked+label::before {
+    background-color: $green;
+  }
