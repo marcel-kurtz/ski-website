@@ -36,7 +36,7 @@ Route::group(['prefix' => '/member',  'middleware' => 'userRoleCheck:member'], f
         Route::get('/myLizenz', 'MemberController@myLizenz');
         Route::get('/myData', 'MemberController@myData');
         
-        Log::info('POST Methoden');
+        //POST
         Route::post('/myData', 'MemberController@updateDaten');
         Route::post('/myData/password', 'MemberController@updatePassword');
         Route::post('/myLizenz', 'MemberController@updateLizenz');
@@ -60,6 +60,14 @@ Route::group(['prefix' => '/admin',  'middleware' => 'userRoleCheck:admin'], fun
     // Matches The "/admin/*" URL
         Route::get('/', 'AdminController@index');
         Route::get('/vorstand', 'AdminController@VorstandVerwalter');
+
+
+        //POST
+        Route::post('/vorstand/add/vorstand', 'AdminController@addVorstand');
+        Route::post('/vorstand/add/admin',    'AdminController@addAdmin');
+        Route::post('/vorstand/del/vorstand', 'AdminController@delVorstand');
+        Route::post('/vorstand/del/admin',    'AdminController@delAdmin');
+        
     }); 
 
 
