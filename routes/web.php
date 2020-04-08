@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/whoiswho', 'HomeController@whoiswho');
 Route::get('/news', 'HomeController@news');
-Route::get('/satzung', 'HomeController@satzung');
 
 // legal
 Route::get('/impressum', function () {
@@ -27,6 +26,7 @@ Route::get('/impressum', function () {
 Route::get('/datenschutz', function () {
     return view('layouts.legal.datenschutz');
 });
+Route::get('/satzung', 'HomeController@satzung');
 
 
 // Nutzerbereich
