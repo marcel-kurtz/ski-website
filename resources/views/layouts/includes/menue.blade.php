@@ -3,15 +3,15 @@
     <li class="nav-item">
         <a class="nav-link" href="/">Start</a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="/news">News</a>
+    <li class="nav-item ">
+        <a class="nav-link disabled" href="/news">News</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/whoiswho">Who is Who</a>
+        <a class="nav-link disabled" href="/whoiswho">Who is Who</a>
     </li>
     @if ($role == 'member' || $role == 'admin' || $role == 'vorstand')
         <li class="nav-item border border-success rounded mx-1">
-            <a class="nav-link " href="/member">Home</a>
+            <a class="nav-link  disabled" href="/member">Home</a>
         </li>
         <li class="nav-item border border-success rounded mx-1">
             <a class="nav-link " href="/member/myData">Meine Daten</a>
@@ -22,15 +22,15 @@
     @endif
     @if ($role == 'admin' || $role == 'vorstand')
         <li class="nav-item border border-info rounded mx-1">
-            <a class="nav-link " href="/vorstand">Home</a>
+            <a class="nav-link  disabled" href="/vorstand">Home</a>
         </li>
     @endif
     @if ($role == 'admin')
         <li class="nav-item border border-warning rounded mx-1">
-            <a class="nav-link " href="/admin">Home</a>
+            <a class="nav-link  disabled" href="/admin">Home</a>
         </li>
         <li class="nav-item border border-warning rounded mx-1">
-            <a class="nav-link " href="/admin/vorstand">Vorstand</a>
+            <a class="nav-link  disabled" href="/admin/vorstand">Vorstand</a>
         </li>
     @endif
     
