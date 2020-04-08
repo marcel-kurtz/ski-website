@@ -16,7 +16,7 @@
                 <li><a href="/news">news</a></li>
             </ul>
         </div>
-        <div class="col-12 col-md-6 p-3 border-left">
+        <!-- <div class="col-12 col-md-6 p-3 border-left">
             <h5 class="text-uppercase text-center">Wohlfühlwetter für Schneesportler</h5>
             <div class="row">
                 <div class="col-6">
@@ -32,6 +32,6 @@
                 </div>
             </div>
             <small class="font-italic">Es handelt sich um erfundene Werte... leider</small>
-        </div>
+        </div> -->
     </div>
 </footer>

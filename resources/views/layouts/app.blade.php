@@ -27,7 +27,7 @@
             <!-- </div> -->
         </nav>
 
-        <main id="app" class="py-4 px-3  mx-auto bg-white">
+        <main id="app" class="py-4 px-3 mx-auto bg-white">
             @include('parts.alert')
             @yield('content')
         </main>

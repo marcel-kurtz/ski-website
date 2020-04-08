@@ -22,10 +22,10 @@ Route::get('/satzung', 'HomeController@satzung');
 
 // legal
 Route::get('/impressum', function () {
-    return view('oeffentlich.pages.start');
+    return view('layouts.legal.impressum');
 });
 Route::get('/datenschutz', function () {
-    return view('oeffentlich.pages.start');
+    return view('layouts.legal.datenschutz');
 });
 
 
