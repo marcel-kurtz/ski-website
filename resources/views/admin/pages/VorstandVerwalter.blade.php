@@ -40,7 +40,7 @@
     <form action="/admin/vorstand/add/vorstand" method="POST">
     @csrf
         <label for="addVorstand">Vorstand hinzufügen</label>
-        <input list="potentielleVorstaende" id="addVorstand" name="addVorstand" />
+        <input list="potentielleVorstaende" id="addVorstand" name="addVorstand" required/>
         <datalist id="potentielleVorstaende">
             @foreach ($usersNoVorstand as $userNoVorstand)
                 <option value="{{ $userNoVorstand->name }};{{ $userNoVorstand->firstname }}">
@@ -88,7 +88,7 @@
     <form action="/admin/vorstand/add/admin" method="POST">
     @csrf
         <label for="addAdmin">Admin hinzufügen</label>
-        <input list="potentielleAdmins" id="addAdmin" name="addAdmin" />
+        <input list="potentielleAdmins" id="addAdmin" name="addAdmin" required/>
         <datalist id="potentielleAdmins">
             @foreach ($usersNoAdmin as $userNoAdmin)
                 <option value="{{ $userNoAdmin->name }};{{ $userNoAdmin->firstname }}">

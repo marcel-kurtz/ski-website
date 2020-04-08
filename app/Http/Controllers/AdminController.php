@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Input\Input;
 
 class AdminController extends Controller
 {
@@ -54,22 +55,26 @@ class AdminController extends Controller
             ->with('usersNoAdmin', $usersNoAdmin);
     }
     public function addVorstand(Request $request){
-        Log::info($request->input('addVorstand'));
-        $name = explode(";", $request->input('addVorstand'))[0];
-        $firstname = explode(";", $request->input('addVorstand'))[1];
-        DB::table('users')
-            ->where('name', $name)
-            ->where('firstname', $firstname)
-            ->update(['role' => 'vorstand']);
+        if ($request->input('addVorstand') != null) {
+            Log::info($request->input('addVorstand'));
+            $name = explode(";", $request->input('addVorstand'))[0];
+            $firstname = explode(";", $request->input('addVorstand'))[1];
+            DB::table('users')
+                ->where('name', $name)
+                ->where('firstname', $firstname)
+                ->update(['role' => 'vorstand']);
+        }        
         return redirect('/admin/vorstand');   
     }
     public function addAdmin(Request $request){
-        $name = explode(";", $request->input('addAdmin'))[0];
-        $firstname = explode(";", $request->input('addAdmin'))[1];
-        DB::table('users')
-            ->where('name', $name)
-            ->where('firstname', $firstname)
-            ->update(['role' => 'admin']);
+        if ($request->input('addAdmin') != null) {
+            $name = explode(";", $request->input('addAdmin'))[0];
+            $firstname = explode(";", $request->input('addAdmin'))[1];
+            DB::table('users')
+                ->where('name', $name)
+                ->where('firstname', $firstname)
+                ->update(['role' => 'admin']);
+        }
         return redirect('/admin/vorstand');   
     }
     public function delVorstand(Request $request){
