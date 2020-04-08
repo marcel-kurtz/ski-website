@@ -35,6 +35,10 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')
+            ->except('logout');
     }
+
+
+    // TODO - login nur möglich wenn users.active == true ist 
 }

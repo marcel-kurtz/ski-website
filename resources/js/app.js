@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+import('./alertHandler');
 
 window.Vue = require('vue');
 

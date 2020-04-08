@@ -10901,3 +10901,7 @@ a.text-dark:focus {
   background-color: #38c172;
 }
 
+.collapseButton:hover {
+  font-weight: bold;
+}
+

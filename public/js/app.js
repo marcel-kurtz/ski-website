@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"/js/app": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -78,6 +183,16 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -49505,6 +49620,7 @@ module.exports = function(module) {
  */
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__.e(/*! import() */ 0).then(__webpack_require__.t.bind(null, /*! ./alertHandler */ "./resources/js/alertHandler.js", 7));
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49650,7 +49766,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Expected '.\n   ╷\n14 │ @import '~@fortawesome/fontawesome-free/css/all.min.css;\n   │                                                         ^\n   ╵\n  C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\resources\\sass\\app.scss 14:57  root stylesheet\n    at runLoaders (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\webpack\\lib\\NormalModule.js:316:20)\n    at C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at render (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass-loader\\dist\\index.js:73:7)\n    at Function.call$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:87203:16)\n    at _render_closure1.call$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:76994:12)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23491:12)\n    at Object._asyncRethrow (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3256:17)\n    at C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:13326:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3279:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23512:12)\n    at _awaitOnObject_closure0.call$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23504:25)\n    at _RootZone.runBinary$3$3 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:25521:18)\n    at _RootZone.runBinary$3 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:25525:19)\n    at _FutureListener.handleError$1 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23975:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:24271:40)\n    at Object._Future__propagateToListeners (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3500:88)\n    at _Future._completeError$2 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:24099:9)\n    at _Future__asyncCompleteError_closure.call$0 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:24194:18)\n    at Object._microtaskLoop (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3550:21)\n    at StaticClosure._startMicrotaskLoop (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:3556:11)\n    at _AsyncRun__scheduleImmediateJsOverride_internalCallback.call$0 (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:23409:21)\n    at invokeClosure (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:1360:26)\n    at Immediate.<anonymous> (C:\\Users\\Marcel\\Desktop\\Projekte\\skiapp\\git\\website\\node_modules\\sass\\sass.dart.js:1381:18)\n    at runCallback (timers.js:705:18)\n    at tryOnImmediate (timers.js:676:5)\n    at processImmediate (timers.js:658:5)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

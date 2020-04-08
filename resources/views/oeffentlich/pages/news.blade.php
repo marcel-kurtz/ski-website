@@ -1,5 +1,5 @@
 @extends('oeffentlich.layout')
 
 @section('content')
-    Start
+    news
 @endsection

@@ -29,7 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('ort');
             $table->string('tel');
 
-            $table->string('role');
+            $table->enum('role', ['member', 'vorstand', 'admin']);
+            $table->boolean('aktiv');
         });
     }
 

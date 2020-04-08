@@ -27,10 +27,13 @@
             <!-- </div> -->
         </nav>
 
-        <main class="py-4 px-3  mx-auto bg-white">
+        <main id="app" class="py-4 px-3  mx-auto bg-white">
+            @include('parts.alert')
             @yield('content')
         </main>
 </body>
+
+
 @include('layouts.includes.footer')
 
 </html>
