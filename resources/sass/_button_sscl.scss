@@ -1,0 +1,17 @@
+.button-sscl {
+    border: none !important;
+
+
+    &-gruen {
+        background-color: $sscl_gruen ;
+    }
+    &-blau {
+        background-color: $sscl_blau ;
+    }
+    &-lila {
+        background-color: $sscl_lila ;
+    }
+    &-orange {
+        background-color: $sscl_orange ;
+    }
+}
