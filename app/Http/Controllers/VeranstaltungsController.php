@@ -103,7 +103,7 @@ class VeranstaltungsController extends Controller
      */
     public function index()
     {
-        $veranstaltungen = Veranstaltung::all() ;
+        $veranstaltungen = Veranstaltung::all()->where('active', true)->where('start' ,'>=',now()) ;
         return view('veranstaltungen.veranstaltungenIndex')
             ->with('veranstaltungen',$veranstaltungen);
     }

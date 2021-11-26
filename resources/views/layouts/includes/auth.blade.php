@@ -1,32 +1,31 @@
 <!-- Authentication Links -->
 @guest
     @if (Route::has('login'))
-        <li class="nav-item">
+        <li class="nav-item btn btn-outline-light mx-2">
             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
         </li>
     @endif
 
     @if (Route::has('register'))
-        <li class="nav-item">
+        <li class="nav-item btn btn-outline-light mx-2">
             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
         </li>
     @endif
-@else
-    <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->firstname }} {{ Auth::user()->name }}
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-            </form>
-        </div>
-    </li>
 @endguest
+@auth
+    <div class="nav-item btn-group p-1">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit"
+                    class="btn btn-outline-dark nav-link dropdown-toggle"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown-menu"
+                    aria-haspopup="true"
+                    aria-expanded="true">
+                Du Bist {{ Auth::user()->VollerName }}<br>
+                {{ __('Logout') }}
+            </button>
+        </form>
+    </div>
+@endauth

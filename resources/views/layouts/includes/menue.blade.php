@@ -1,40 +1,40 @@
-    <li class="nav-item">
+    <div class="m-1 p-1 nav-item">
         <a class="nav-link" href="/">Start</a>
-    </li>
-    <li class="nav-item ">
+    </div>
+    <div class="m-1 p-1 nav-item ">
         <a class="nav-link" href="/veranstaltungen">Veranstaltungen</a>
-    </li>
-    <li class="nav-item">
+    </div>
+    <div class="m-1 p-1 nav-item">
         <a class="nav-link disabled" href="/whoiswho">Who is Who</a>
-    </li>
+    </div>
     @auth
         @if ( Auth::user()->hasRole('member') )
-            <li class="nav-item button-sscl-gruen rounded mx-1 bg-primary">
+            <div class="m-1 p-1 nav-item button-sscl-gruen rounded bg-primary bg-opacity-25">
                 <a class="nav-link  disabled" href="/member">Home</a>
-            </li>
-            <li class="nav-item button-sscl-gruen rounded mx-1 bg-primary">
+            </div>
+            <div class="m-1 p-1 nav-item button-sscl-gruen rounded bg-primary bg-opacity-25">
                 <a class="nav-link " href="/member/myData">Meine Daten</a>
-            </li>
-            <li class="nav-item button-sscl-gruen rounded mx-1 bg-primary">
+            </div>
+            <div class="m-1 p-1 nav-item button-sscl-gruen rounded bg-primary bg-opacity-25">
                 <a class="nav-link " href="/member/myLizenz">Meine Lizenzen</a>
-            </li>
+            </div>
         @endif
         @if ( Auth::user()->hasRole('vorstand') )
-            <li class="nav-item button-sscl-blau rounded mx-1 bg-info">
+            <div class="m-1 p-1 nav-item button-sscl-blau rounded bg-info bg-opacity-25">
                 <a class="nav-link" href="/vorstand">Vorstand</a>
-            </li>
+            </div>
         @endif
         @if ( Auth::user()->hasRole('veranstalter') )
-            <li class="nav-item button-sscl-lila rounded mx-1 bg-success">
+            <div class="m-1 p-1 nav-item button-sscl-lila rounded bg-success bg-opacity-25">
                 <a class="nav-link" href="/veranstaltungsManagement">Veranstaltung</a>
-            </li>
+            </div>
         @endif
         @if ( Auth::user()->hasRole('admin') )
-            <li class="nav-item button-sscl-orange rounded mx-1 bg-warning">
+            <div class="m-1 p-1 nav-item button-sscl-orange rounded bg-warning bg-opacity-25">
                 <a class="nav-link" href="/admin">Home</a>
-            </li>
-            <li class="nav-item button-sscl-orange rounded mx-1 bg-warning">
+            </div>
+            <div class="m-1 p-1 nav-item button-sscl-orange rounded bg-warning bg-opacity-25">
                 <a class="nav-link" href="/admin/vorstand">Vorstand</a>
-            </li>
+            </div>
         @endif
     @endauth
