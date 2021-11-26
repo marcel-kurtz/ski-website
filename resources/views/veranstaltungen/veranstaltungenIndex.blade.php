@@ -106,6 +106,7 @@
             </div>
         </table>
     @endif
+    @auth
     @if(count($veranstaltungen) === 0)
         <div class="card text-center my-5">
             <div class="card-body">
@@ -116,4 +117,15 @@
             </div>
         </div>
     @endif
+    @endauth
+    @guest
+        <div class="card text-center my-5">
+            <div class="card-body">
+                <h2 class="card-title">Offenbar steht gerade nichts an</h2>
+            </div>
+            <div class="card-footer text-muted">
+                Du musst dich leider noch etwas gedulden.
+            </div>
+        </div>
+    @endguest
 @endsection
