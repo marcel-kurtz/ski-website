@@ -20,6 +20,7 @@ class Veranstaltung extends Model
         'titel',
         'pflicht_angaben',
         'freiwillige_angaben',
+        'ansprechpartner'
     ];
     // public function getAnsprechpartner() {
     //     return $this->belongsTo('App\Models\User','ansprechpartner','id');
