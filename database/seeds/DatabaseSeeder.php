@@ -4,6 +4,9 @@ use Illuminate\Database\Seeder;
 
 use Database\seeds\Userroles;
 use Database\seeds\User;
+use Database\seeds\VeranstaltungsSeeder;
+use Database\seeds\VeranstaltunsTeilnahmenSeeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,8 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            Userroles::class,
             User::class,
+            Userroles::class,
+            VeranstaltungsSeeder::class,
+            VeranstaltunsTeilnahmenSeeder::class,
         ]);
 
     }
