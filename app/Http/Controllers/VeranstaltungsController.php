@@ -226,7 +226,7 @@ class VeranstaltungsController extends Controller
         $result = $request->validate($this->VeranstaltungRequestValidateArray);
         log::info($request);
         log::error($request->file());
-ech;
+      
         if(isset($result['id'])) {
             $model = $this->update($request);
             $messageString = 'Veranstaltung'. $model->title .'wurde aktualisiert';
@@ -262,7 +262,7 @@ ech;
     /**
      * Ändert den Zustand von active (bool)
      */
-    public function manageChangeActiveStatus(Request $request) {
+    public function managangeActiveStatus(Request $request) {
         $id = $request->VeranstaltunsId;
         $veranstaltung = Veranstaltung::find($id);
         // Change activity status
