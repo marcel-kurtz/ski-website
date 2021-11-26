@@ -20,7 +20,6 @@ class VeranstaltungsController extends Controller
 {
     public function __construct()
     {
-        $this->repository = new VeranstaltungsRepository;
         $this->VeranstaltungRequestValidateArray = [
             "id" => ['exists:App\Models\Veranstaltung,id'],
             "anmelde_start" => ['required','before:anmelde_ende'],
