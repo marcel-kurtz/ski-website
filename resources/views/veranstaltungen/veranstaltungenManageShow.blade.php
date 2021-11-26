@@ -89,23 +89,8 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <input type="file" class="" id="AusschreibungFile">
                 <div class="col-md-4 col-12">
-                    <label for="AusschreibungFile">Ausschreibung hochladen</label>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Upload</span>
-                        </div>
-                        <div class="custom-file">
-
-                            <label class="custom-file-label" for="AusschreibungFile">Choose file</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-4 col-12">
-                    <button type="submit" class="btn bg-success">Veranstaltung anlegen</button>
+                    <button type="submit" class="btn bg-success">Veranstaltung speichern</button>
                 </div>
             </div>
         </div>

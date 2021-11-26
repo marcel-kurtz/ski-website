@@ -27,7 +27,7 @@ class VeranstaltungsController extends Controller
             "start" => ['required','before:ende'],
             "ende" => ['required'],
             // "active" => ['accepted'],
-            "ansprechpartner" => ['required','exists:users,id'],
+            // "ansprechpartner" => ['required','exists:users,id'],
             "preis" => ['required','numeric'],
             "max_teilnehmer" => ['required','Integer'],
             "beschreibung" => ['required','nullable','string'],
@@ -223,15 +223,27 @@ class VeranstaltungsController extends Controller
      *
      */
     public function manageCreate(Request $request) {
-        $result = $request->validate($this->VeranstaltungRequestValidateArray);
+        // $result = $request->validate($this->VeranstaltungRequestValidateArray);
         log::info($request);
-        log::error($request->file());
-ech;
-        if(isset($result['id'])) {
-            $model = $this->update($request);
+
+        $model = Veranstaltung::updateOrCreate([
+            'id' => $request->id
+        ],[
+            'start' => $request->start,
+            'ende' => $request->ende,
+            'anmelde_start' => $request->anmelde_start,
+            'anmelde_ende' => $request->anmelde_ende,
+            'active' => isset($request->active) ,
+            'ansprechpartner' => $request->ansprechpartner,
+            'preis' => $request->preis,
+            'max_teilnehmer' =>$request->max_teilnehmer,
+            'beschreibung' => $request->beschreibung,
+            'titel' => $request->titel
+        ]);
+
+        if(isset($request->id)) {
             $messageString = 'Veranstaltung'. $model->title .'wurde aktualisiert';
         } else {
-            $model = $this->createOrUpdate($request);
             $messageString = 'Veranstaltung'. $model->title .'angelegt';
         }
 
