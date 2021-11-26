@@ -18,6 +18,7 @@ class Lizenz extends Migration
 
             $table->unsignedMediumInteger('user');
             $table->foreign('user')->references('id')->on('users');
+            $table->timestamps();
 
             $table->enum( 'disziplin', ['Alpin','Snowboard','Telemark','Nordic','Skitour']);
             $table->enum( 'verband' , ['DSV', 'DSLV', 'ÖSV']);

@@ -4,7 +4,7 @@ namespace Database\seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\User as Usermodel;
 
 class User extends Seeder
 {
@@ -15,10 +15,9 @@ class User extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            [
+        Usermodel::create([
                 'email' => 'Kontakt@marcelkurtz.de' ,
-                'password' =>  '$2y$10$aAcqHCNaSfCjj5s5iAw7SeAxm/dRHZT3n9flo2rxOsM1tkkQTdbaC',
+                'password' =>  'asdfasdf',
                 'name' => 'Kurtz' ,
                 'firstname' =>  'Marcel',
                 'birthdate' => '1997-05-27' ,
@@ -28,7 +27,6 @@ class User extends Seeder
                 'tel'  =>  '+49 152 5428 6163',
                 'role' => 'admin' ,
                 'aktiv' => true,
-            ],
         ]);
         DB::table('lizenzen')->insert([
             [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class VorstandController extends Controller
 {
@@ -19,10 +20,9 @@ class VorstandController extends Controller
 
     public function index()
     {
-        $mitglieder = DB::table('users')
-            ->where('aktiv', true)
-            ->get();
-        
+        $mitglieder = User::where('aktiv', true)
+                        ->get();
+
         return view('Vorstand.pages.home')
             ->with('mitglieder', $mitglieder);
     }
