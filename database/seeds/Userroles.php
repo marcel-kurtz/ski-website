@@ -4,6 +4,7 @@ namespace Database\seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserRoles as UserRolesModel;
 
 class Userroles extends Seeder
 {
@@ -14,13 +15,14 @@ class Userroles extends Seeder
      */
     public function run()
     {
-        DB::table('user_roles')->insert([
-            
-            
-            ['name' => 'member', 'includes' => null ],
-            ['name' => 'vorstand' , 'includes' => 1],
-            ['name' => 'admin', 'includes' => 2],
-            ['name' => 'admin', 'includes' => 1],
-        ]);
+        $model1 = UserRolesModel::create(['name' => 'member' ]);
+        $model2 = UserRolesModel::create(['name' => 'vorstand' ]);
+        $model3 = UserRolesModel::create(['name' => 'veranstalter' ]);
+        $model4 = UserRolesModel::create(['name' => 'admin' ]);
+
+        DB::table('userHasRole')->insert(['user_id' => 1 ,'user_role_id' => $model1->id ,]);
+        DB::table('userHasRole')->insert(['user_id' => 1 ,'user_role_id' => $model2->id ,]);
+        DB::table('userHasRole')->insert(['user_id' => 1 ,'user_role_id' => $model3->id ,]);
+        DB::table('userHasRole')->insert(['user_id' => 1 ,'user_role_id' => $model4->id ,]);
     }
 }

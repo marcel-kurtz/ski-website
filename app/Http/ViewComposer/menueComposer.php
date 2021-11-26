@@ -18,14 +18,17 @@ class menueComposer
     public function compose(View $view)
     {
         $role = '';
-        Log::info('menue seeder w. userrole'); 
-        if (Auth::user() != null){
-            $role = DB::table('user_roles')->select('name')->where('name', Auth::user()->role )->pluck('name')[0];
+        if ( Auth::check() ){
+            $role = Auth::user()->role;
+            $roles = Auth::user()->roles()->pluck('name');
         }
         else {
             $role = '';
+            $roles = json_encode([]);
         }
-        
-        $view->with('role', $role );
+
+        $view
+            ->with('role', $role )
+            ->with('roles', $roles );
     }
 }

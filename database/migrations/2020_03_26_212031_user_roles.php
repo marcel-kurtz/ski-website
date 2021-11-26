@@ -15,11 +15,12 @@ class UserRoles extends Migration
     {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->text('name');
             $table->integer('includes')->nullable();
         });
 
-        
+
     }
 
     /**

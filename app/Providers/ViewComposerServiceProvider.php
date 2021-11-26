@@ -27,11 +27,6 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Log::info('ViewComposers called');
-
-        View::composer(
-            'layouts.includes.menue', menueComposer::class
-        );
-
+        View::composer('*', menueComposer::class);
     }
 }
