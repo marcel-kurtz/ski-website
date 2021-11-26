@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -9,7 +10,7 @@ use Symfony\Component\Console\Input\Input;
 
 class AdminController extends Controller
 {
-    
+
 
     /**
      * Create a new controller instance.
@@ -25,24 +26,20 @@ class AdminController extends Controller
     {
         $users = DB::table('users')
             ->get();
-        
+
         return view('admin.pages.home')
             ->with('users',$users);
     }
 
     public function VorstandVerwalter()
     {
-        $admins = DB::table('users')
-            ->where('role', 'admin')
+        $admins = User::where('role', 'admin')
             ->get();
-        $vorstaende = DB::table('users')
-            ->where('role', 'vorstand')
+        $vorstaende = User::where('role', 'vorstand')
             ->get();
-        $usersNoVorstand = DB::table('users')
-            ->where('role','!=', 'vorstand')    
+        $usersNoVorstand = User::where('role','!=', 'vorstand')
             ->get();
-        $usersNoAdmin = DB::table('users')
-            ->where('role','!=', 'admin')    
+        $usersNoAdmin = User::where('role','!=', 'admin')
             ->get();
         Log::info($admins);
         Log::info($vorstaende);
@@ -63,8 +60,8 @@ class AdminController extends Controller
                 ->where('name', $name)
                 ->where('firstname', $firstname)
                 ->update(['role' => 'vorstand']);
-        }        
-        return redirect('/admin/vorstand');   
+        }
+        return redirect('/admin/vorstand');
     }
     public function addAdmin(Request $request){
         if ($request->input('addAdmin') != null) {
@@ -75,19 +72,19 @@ class AdminController extends Controller
                 ->where('firstname', $firstname)
                 ->update(['role' => 'admin']);
         }
-        return redirect('/admin/vorstand');   
+        return redirect('/admin/vorstand');
     }
     public function delVorstand(Request $request){
         DB::table('users')
             ->where('id', $request->input('userId'))
             ->update(['role' => 'member']);
-        return redirect('/admin/vorstand');  
+        return redirect('/admin/vorstand');
     }
     public function delAdmin(Request $request){
         DB::table('users')
         ->where('id', $request->input('userId'))
         ->update(['role' => 'member']);
-    return redirect('/admin/vorstand');  
+    return redirect('/admin/vorstand');
     }
 
 }
