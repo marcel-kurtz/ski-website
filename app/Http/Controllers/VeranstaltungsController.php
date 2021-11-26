@@ -274,7 +274,7 @@ class VeranstaltungsController extends Controller
     /**
      * Ändert den Zustand von active (bool)
      */
-    public function manageChangeActiveStatus(Request $request) {
+    public function managangeActiveStatus(Request $request) {
         $id = $request->VeranstaltunsId;
         $veranstaltung = Veranstaltung::find($id);
         // Change activity status
