@@ -29,11 +29,13 @@
                 <a class="nav-link" href="{{route('veranstaltung_manage_index')}}">Veranstaltung</a>
             </div>
         @endif
+        {{--
         @if ( Auth::user()->hasRole('author') )
             <div class="m-1 p-1 nav-item button-sscl-lila rounded bg-success bg-opacity-25">
                 <a class="nav-link" href="{{ route('AuthorIndex') }}">Beiträge</a>
             </div>
         @endif
+        --}}
         @if ( Auth::user()->hasRole('admin') )
             <div class="m-1 p-1 nav-item button-sscl-orange rounded bg-warning bg-opacity-25">
                 <a class="nav-link" href="/admin">Home</a>
