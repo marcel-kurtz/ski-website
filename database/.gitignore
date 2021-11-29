@@ -5,3 +5,5 @@ seeds/*
 !seeds/DatabaseSeeder.php
 !seeds/User.php
 !seeds/Userroles.php
+!seeds/WebsiteParts.php
+

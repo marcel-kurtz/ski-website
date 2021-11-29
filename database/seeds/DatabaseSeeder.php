@@ -21,10 +21,15 @@ class DatabaseSeeder extends Seeder
         $this->call([
             User::class,
             Userroles::class,
-            VeranstaltungsSeeder::class,
-            VeranstaltunsTeilnahmenSeeder::class,
+
             WebsiteParts::class,
         ]);
+        if(Config::get('app.env') == 'local'){
+            $this->call([
+                VeranstaltungsSeeder::class,
+                VeranstaltunsTeilnahmenSeeder::class,
+            ]);
+        }
 
     }
 }
