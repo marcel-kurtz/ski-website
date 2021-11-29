@@ -62,6 +62,19 @@ Route::group(['prefix' => 'veranstaltungen'], function () {
     });
 });
 
+// autoren
+Route::group(['prefix' => 'author','middleware' => 'userRoleCheck:author'], function () {
+    Route::get('/', [ BeitragsController::class , 'index'])->name('AuthorIndex');
+    Route::get('edit/{id}', [ BeitragsController::class , 'edit'])->name('AuthorEdit');
+    Route::get('delete/{id}', [ BeitragsController::class , 'delete'])->name('AuthorDelete');
+    Route::post('speichern/{id}', [ BeitragsController::class , 'save' ])->name('AuthorSaveBeitrag');
+
+    Route::group(['middleware' => 'userRoleCheck:admin'], function () {
+        // nutzerverwaltung
+        Route::post('neuerAuthor', [ BeitragsController::class , 'addAuthor' ])->name('AuthorAddAuthor');
+        Route::post('deleteAuthor', [ BeitragsController::class , 'deleteAutor' ])->name('AuthorDeleteAuthor');
+    });
+});
 
 
 // Nutzerbereich
