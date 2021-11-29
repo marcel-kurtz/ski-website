@@ -3,17 +3,17 @@
         <div class="col-12 col-md-6 p-3 py-4 border-left">
             <h5 class="text-uppercase text-center">Rechtliches</h5>
             <ul class="list-unstyled text-center ">
-                <li><a href="/impressum">Impressum</a></li>
-                <li><a href="/datenschutz">Datenschutz</a></li>
-                <li><a href="/satzung">Satzung</a></li>
+                <li><a href="{{ route('impressum') }}">Impressum</a></li>
+                <li><a href="{{ route('datenschutz') }}">Datenschutz</a></li>
+                <li><a href="{{ route('satzung') }}">Satzung</a></li>
             </ul>
         </div>
         <div class="col-12 col-md-6 p-3 py-4 border-left">
             <h5 class="text-uppercase text-center">Verein</h5>
             <ul class="list-unstyled text-center">
                 <li><a href="{{ route('register') }}">Mitglied werden</a></li>
-                <li><a href="/whoiswho">Who is Who</a></li>
-                <li><a href="/news">news</a></li>
+                <li><a href="{{ route('whoiswho') }}">Who is Who</a></li>
+                <li><a href="{{ route('news') }}">news</a></li>
             </ul>
         </div>
     </div>

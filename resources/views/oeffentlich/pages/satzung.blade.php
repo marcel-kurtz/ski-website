@@ -2,7 +2,10 @@
 
 @section('content')
     <h1>Satzung</h1>
-    <object class="w-50" data="{{ asset('file/satzung.pdf') }}" style="height:100vh;">
-        <!-- <a href="object.pdf">PDF laden</a> -->
-    </object>
+    <div class="d-flex align-self-stretch">
+    <embed src="{{ Storage::url('file/satzung.pdf') }}"
+           class="w-50"
+           style="height:100vh"
+           type="application/pdf">
+    </div>
 @endsection

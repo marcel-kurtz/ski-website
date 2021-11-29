@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BeitragsController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VeranstaltungsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\legalController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +20,15 @@ use App\Http\Controllers\legalController;
 */
 
 
-Route::get('/', 'HomeController@index');
-Route::get('/whoiswho', 'HomeController@whoiswho');
+Route::get('/', [HomeController::class, 'index'])->name('start');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/whoiswho', [HomeController::class, 'whoiswho'])->name('whoiswho');
+Route::get('/satzung', [ HomeController::class , 'satzung' ])->name('satzung');
+Route::get('/news', [ HomeController::class , 'news' ])->name('news');
 
 // legal
-Route::get('/datenschutz', [ legalController::class , 'datenschutz' ]);
-Route::get('/impressum', [ legalController::class , 'impressum' ]);
-Route::get('/satzung', [ HomeController::class , 'satzung' ]);
+Route::get('/datenschutz', [ legalController::class , 'datenschutz' ])->name('datenschutz');
+Route::get('/impressum', [ legalController::class , 'impressum' ])->name('impressum');
 
 
 // für Veranstalter
@@ -88,21 +92,19 @@ Route::group(['prefix' => '/vorstand',  'middleware' => 'userRoleCheck:vorstand'
 
 // admin
 Route::group(['prefix' => '/admin',  'middleware' => 'userRoleCheck:admin'], function () {
-    // Matches The "/admin/*" URL
-        Route::get('/', 'AdminController@index');
-        Route::get('/vorstand', 'AdminController@VorstandVerwalter');
-
+        Route::get('/', [AdminController::class, 'index']);
+        Route::get('/vorstand', [AdminController::class, 'VorstandVerwalter']);
 
         //POST
-        Route::post('/vorstand/add/vorstand', 'AdminController@addVorstand');
-        Route::post('/vorstand/add/admin',    'AdminController@addAdmin');
-        Route::post('/vorstand/del/vorstand', 'AdminController@delVorstand');
-        Route::post('/vorstand/del/admin',    'AdminController@delAdmin');
+        Route::post('/vorstand/add/vorstand', [AdminController::class, 'addVorstand']);
+        Route::post('/vorstand/add/admin', [AdminController::class, 'addAdmin']);
+        Route::post('/vorstand/del/vorstand', [AdminController::class, 'delVorstand']);
+        Route::post('/vorstand/del/admin', [AdminController::class, 'delAdmin']);
 
+        Route::post('/updateWebsitePart/{part}', [AdminController::class, 'updateWebsitePart'])->name('updateWebsitePart');
     });
 
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 

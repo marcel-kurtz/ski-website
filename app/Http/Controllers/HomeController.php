@@ -25,4 +25,13 @@ class HomeController extends Controller
     {
         return view('oeffentlich.pages.start');
     }
+    public function whoiswho() {
+        return view('oeffentlich.pages.whoiswho');
+    }
+    public function satzung() {
+        return view('oeffentlich.pages.satzung');
+    }
+    public function news() {
+        return view('oeffentlich.pages.news');
+    }
 }

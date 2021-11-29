@@ -7,6 +7,12 @@
  */
 
 require('./bootstrap');
+window.Medium = require('medium-editor');
+window.ready = function() {
+    var editor = new Medium('.editable');
+    editor.pasteHtml('{{ $beitrag->html }}');
+}
+
 // window.Vue = require('vue');
 
 // import Vuetify from 'vuetify'

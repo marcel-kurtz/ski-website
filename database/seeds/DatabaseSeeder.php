@@ -6,6 +6,7 @@ use Database\seeds\Userroles;
 use Database\seeds\User;
 use Database\seeds\VeranstaltungsSeeder;
 use Database\seeds\VeranstaltunsTeilnahmenSeeder;
+use Database\seeds\WebsiteParts;
 
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
             Userroles::class,
             VeranstaltungsSeeder::class,
             VeranstaltunsTeilnahmenSeeder::class,
+            WebsiteParts::class,
         ]);
 
     }

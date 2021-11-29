@@ -53,13 +53,9 @@
 <h2>2. Name und Anschrift des für die Verarbeitung Verantwortlichen</h2>
 <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist die:</p>
 
-<p>SSC Lüneburg</p>
-<p>Richard-Brauer-Straße 15</p>
-<p>21335 Lüneburg</p>
-<p>Deutschland</p>
-<p>Tel.: 015254286163</p>
-<p>E-Mail: ssclueneburg@marcelkurtz.de</p>
-<p>Website: ssc-lueneburg.de</p>
+    {!!
+        \App\Models\WebsiteParts::where('name','datenschutz_angaben')->first()->html;
+    !!}
 
 <h2>3. Cookies</h2>
 <p>Die Internetseiten der SSC Lüneburg verwenden Cookies. Cookies sind Textdateien, welche über einen Internetbrowser auf einem Computersystem abgelegt und gespeichert werden.</p>
@@ -325,4 +321,4 @@ Vor einer Bereitstellung personenbezogener Daten durch den Betroffenen muss sich
 </p>
 
 
-@endsection 
+@endsection

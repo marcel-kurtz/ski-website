@@ -55,11 +55,9 @@ class User extends Authenticatable
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
-        Log::info($this->attributes['email']);
     }
     public function getEmailAttribute()
     {
-        Log::info(strtolower($this->attributes['email']));
         return strtolower($this->attributes['email']);
     }
 

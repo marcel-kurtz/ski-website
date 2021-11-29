@@ -29,4 +29,23 @@
             @endforeach
         </tbody>
     </table>
+
+<h2>Website Parts</h2>
+<div class="col col-lg-7">
+@foreach($websiteparts as $part)
+    <div class="col mb-3">
+        <form action="{{ route('updateWebsitePart', ["part" => $part->id ]) }}" method="POST">
+            @csrf
+            <div><h3>{{$part->name}}</h3></div>
+            <div><small>{{$part->beschreibung}}</small></div>
+            <div><input type="hidden" id="id" name="id" value="{{$part->id}}"></div>
+            <div><textarea class="w-100" rows="3" id="html" name="html">{{$part->html}}</textarea></div>
+            <div><button class="btn btn-sm btn-outline-success" type="submit">speichern</button></div>
+        </form>
+    </div>
+    @if(!$loop->last)
+        <hr class="dropdown-divider">
+    @endif
+@endforeach
+</div>
 @endsection

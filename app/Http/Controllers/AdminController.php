@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Input\Input;
+use App\Models\WebsiteParts;
 
 class AdminController extends Controller
 {
@@ -27,8 +28,11 @@ class AdminController extends Controller
         $users = DB::table('users')
             ->get();
 
+        $websiteparts = WebsiteParts::all()->sortBy('name');
+
         return view('admin.pages.home')
-            ->with('users',$users);
+            ->with('users',$users)
+            ->with('websiteparts',$websiteparts);
     }
 
     public function VorstandVerwalter()
@@ -87,4 +91,10 @@ class AdminController extends Controller
     return redirect('/admin/vorstand');
     }
 
+    public function updateWebsitePart($part, Request $request) {
+        $model = WebsiteParts::find($part)->first();
+        $model->html = $request->html;
+        $model->save();
+        return back();
+    }
 }
