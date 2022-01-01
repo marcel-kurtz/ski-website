@@ -3,14 +3,14 @@
 @section('content')
 <div class="card">
     <div class="card-body col justify-content-center">
-        <div class="form-group row">
+        <div class="form-group row my-1">
             <h1>{{ __('Mitglied werden') }}</h1>
         </div>
         <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Vorname -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('Vorname') }}</label>
 
                 <div class="col-md-6">
@@ -25,7 +25,7 @@
             </div>
 
             <!-- Nachname -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                 <div class="col-md-6">
@@ -40,7 +40,7 @@
             </div>
 
             <!-- birthdate -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="birthdate" class="col-md-4 col-form-label text-md-right">{{ __('Geburtsdatum') }}</label>
 
                 <div class="col-md-6">
@@ -55,7 +55,7 @@
             </div>
 
             <!-- tel -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('Telefon') }}</label>
 
                 <div class="col-md-6">
@@ -70,7 +70,7 @@
             </div>
 
             <!-- Strasse -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="strasse" class="col-md-4 col-form-label text-md-right">{{ __('Straße') }}</label>
 
                 <div class="col-md-6">
@@ -85,7 +85,7 @@
             </div>
 
             <!-- plz -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="plz" class="col-md-4 col-form-label text-md-right">{{ __('PLZ') }}</label>
 
                 <div class="col-md-6">
@@ -100,7 +100,7 @@
             </div>
 
             <!-- ort -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="ort" class="col-md-4 col-form-label text-md-right">{{ __('Ort') }}</label>
 
                 <div class="col-md-6">
@@ -115,7 +115,7 @@
             </div>
 
             <!-- E-Mail -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                 <div class="col-md-6">
@@ -130,7 +130,7 @@
             </div>
 
             <!-- Passwort -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                 <div class="col-md-6">
@@ -145,7 +145,7 @@
             </div>
 
             <!-- Password confirm -->
-            <div class="form-group row">
+            <div class="form-group row my-1">
                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                 <div class="col-md-6">
@@ -166,14 +166,14 @@
 
                 <div class="offset-4 col-6 form-check">
                     <input id="mitgliedsbeitrag" type="checkbox" class="red-green-checkbox form-check-input" required>
-                    <label for="mitgliedsbeitrag" class="form-check-label">{{ __('Ich erkläre mich bereit den satzungsgemäßen Mitgliedsbeitrag zu entrichten') }}</label>
+                    <label for="mitgliedsbeitrag" class="form-check-label">{{ __('Ich stelle hiermit einen Mitgliedsantrag und erkläre mich bereit den satzungsgemäßen Mitgliedsbeitrag zu entrichten') }}</label>
                 </div>
 
                 <!-- Satzung -->
 
                 <div class="offset-4 col-6 form-check">
                     <input id="satzung" type="checkbox" class="red-green-checkbox form-check-input" required>
-                    <label for="satzung" class="form-check-label">{{ __('Confirm Password') }}</label>
+                    <label for="satzung" class="form-check-label">Ich erkenne die <a href="{{ route('satzung') }}">Satzung</a> des SSC Lüneburg an</label>
                 </div>
             </div>
 

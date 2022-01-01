@@ -30,7 +30,8 @@ class User extends Authenticatable
         'ort',
         'tel',
 
-        'role',
+        // role feature removed an 2021-12-13
+        // 'role',
         'aktiv',
     ];
 
@@ -72,17 +73,16 @@ class User extends Authenticatable
 
     public function roles()
     {
-        $result = $this->belongsToMany (
+        return $this->belongsToMany (
             'App\Models\UserRoles',
             'userHasRole',
             'user_id',
             'user_role_id'
         );
-        return $result;
     }
 
     /**
-     * Gibt an, ob eine bestimmte Rolle einem Nutzer zugewiesen ist.
+     * Gibt boolean, ob eine bestimmte Rolle einem Nutzer zugewiesen ist.
      * Ein Admin bekommt immer Zugriff auf alle Ressourcen
      *
      * @param String

@@ -33,7 +33,7 @@ Route::get('/impressum', [ legalController::class , 'impressum' ])->name('impres
 
 // für Veranstalter
 Route::group(['prefix' => 'veranstaltungsManagement',  'middleware' => 'userRoleCheck:veranstalter'], function () {
-    Route::get('', [ VeranstaltungsController::class , 'manageIndex' ]) -> name('veranstaltung_manage_index');
+    Route::get('/', [ VeranstaltungsController::class , 'manageIndex' ]) -> name('veranstaltung_manage_index');
     Route::get('show/{id}', [ VeranstaltungsController::class , 'manageShow' ])->name('manageVeranstaltungShow');
 
     Route::post('save/{id}', [ VeranstaltungsController::class , 'manageSave' ]);
