@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\UserRoles;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserRoles as UserRolesModel;
+use App\Models\UserHasRole;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+
 
 class RegisterController extends Controller
 {
@@ -82,12 +86,21 @@ class RegisterController extends Controller
             'aktiv' => true,
         ]);
         // add member role to new user
-        $memberRole = \App\Models\UserRoles::where('name','member')->get();
+        $memberRole = UserRolesModel::where('name','member')->first();
+
+        Log::info($user);
+        Log::info($memberRole);
+        log::info($user->roles()->get());
         if($memberRole) {
-            $user->roles()->associate($memberRole);
+            # $user->roles()->attach($memberRole->id);
+            UserHasRole::create([
+                "user_id" => $user->id,
+                "user_role_id" => $memberRole->id
+            ]);
         }
+
         // for developement
-        $user->delete();
+        // $user->delete();
 
         return $user;
     }

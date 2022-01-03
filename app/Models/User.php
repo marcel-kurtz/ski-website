@@ -73,10 +73,12 @@ class User extends Authenticatable
 
     public function roles()
     {
-        return $this->belongsToMany (
-            'App\Models\UserRoles',
-            'userHasRole',
+        return $this->hasManyThrough(
+            UserRoles::class,
+            userHasRole::class,
             'user_id',
+            'id',
+            'id',
             'user_role_id'
         );
     }
